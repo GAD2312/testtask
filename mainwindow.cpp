@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-double termFirst, hiddenAnswer;
+double termFirst, hiddenAnswer , termSecond, answer;
 
+QString labelTerm;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -38,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton_minus->setCheckable(true);
     ui->pushButton_multiply->setCheckable(true);
     ui->pushButton_divide->setCheckable(true);
+    ui->pushButton_isEqualTo->setCheckable(true);
 
 }
 
@@ -46,13 +48,45 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::calculation(){
+
+    if(ui->pushButton_plus->isChecked()){
+         answer = termFirst + termSecond;
+         labelTerm = QString::number(answer);
+
+         ui->label->setText(labelTerm);
+         ui->pushButton_plus->setChecked(false);
+    } else if(ui->pushButton_minus->isChecked()){
+        answer = termFirst - termSecond;
+        labelTerm = QString::number(answer);
+
+        ui->label->setText(labelTerm);
+        ui->pushButton_minus->setChecked(false);
+    } else if(ui->pushButton_multiply->isChecked()){
+        answer = termFirst * termSecond;
+        labelTerm = QString::number(answer);
+
+        ui->label->setText(labelTerm);
+        ui->pushButton_multiply->setChecked(false);
+    } else if(ui->pushButton_divide->isChecked()){
+        if (termSecond == 0){
+             ui->label->setText("Error");
+        } else {
+        answer = termFirst / termSecond;
+        labelTerm = QString::number(answer);
+
+        ui->label->setText(labelTerm);
+        ui->pushButton_divide->setChecked(false);
+    }}
+
+}
 
 void MainWindow::clickOnPushButton_number()
 {
     QPushButton  *button = (QPushButton *)sender();
 
     double term;
-    QString labelTerm;
+
 
     if (ui->label->text().contains(".") && button->text() == "0"){
        labelTerm = ui->label->text() + button->text();
@@ -94,17 +128,21 @@ void MainWindow::clickOnPushButton_firstTermOperation()
 
         ui->label->setText(labelTerm);
     }
-
 }
 
 void MainWindow::mathOperations()
 {
     QPushButton  *button = (QPushButton *)sender();
-
+    calculation();
     termFirst = ui->label->text().toDouble();
+    if (ui->pushButton_isEqualTo->isChecked()){
+        ui->label_3->setText("");
+    }
+    ui->label_2->setText(ui->label_2->text() + ui->label->text() +
+                        button->text());
     ui->label->setText("");
-
     button->setChecked(true);
+
 }
 
 
@@ -115,6 +153,8 @@ void MainWindow::clickOnPushButton_CE()
     ui->pushButton_minus->setChecked(false);
     ui->pushButton_multiply->setChecked(false);
     ui->pushButton_divide->setChecked(false);
+    ui->pushButton_isEqualTo->setChecked(false);
+
 
 
     ui->label->setText("0");
@@ -123,42 +163,15 @@ void MainWindow::clickOnPushButton_CE()
 
 
 
-
 void MainWindow::clickOnPushButton_isEqualTo()
 {
-    double answer, termSecond;
-    QString labelTerm;
+    QPushButton  *button = (QPushButton *)sender();
 
     termSecond = ui->label->text().toDouble();
+    ui->label_3->setText("=");
+    calculation();
 
-   if(ui->pushButton_plus->isChecked()){
-        answer = termFirst + termSecond;
-        labelTerm = QString::number(answer);
-
-        ui->label->setText(labelTerm);
-        ui->pushButton_plus->setChecked(false);
-   } else if(ui->pushButton_minus->isChecked()){
-       answer = termFirst - termSecond;
-       labelTerm = QString::number(answer);
-
-       ui->label->setText(labelTerm);
-       ui->pushButton_minus->setChecked(false);
-   } else if(ui->pushButton_multiply->isChecked()){
-       answer = termFirst * termSecond;
-       labelTerm = QString::number(answer);
-
-       ui->label->setText(labelTerm);
-       ui->pushButton_multiply->setChecked(false);
-   } else if(ui->pushButton_divide->isChecked()){
-       if (termSecond == 0){
-            ui->label->setText("Error");
-       } else {
-       answer = termFirst / termSecond;
-       labelTerm = QString::number(answer);
-
-       ui->label->setText(labelTerm);
-       ui->pushButton_divide->setChecked(false);
-   }}
+    button->setChecked(true);
 }
 
 
