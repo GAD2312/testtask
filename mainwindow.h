@@ -17,5 +17,15 @@ public:
 
 private:
     Ui::MainWindow *ui;
+private slots:
+   void clickOnPushButton_number();//Ввод числа
+   void clickOnPushButton_dot();
+   void clickOnPushButton_firstTermOperation();
+   void clickOnPushButton_CE();
+   void mathOperations();
+   void clickOnPushButton_isEqualTo();
+
+
+
 };
 #endif // MAINWINDOW_H
