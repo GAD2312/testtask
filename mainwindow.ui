@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>946</width>
-    <height>600</height>
+    <width>382</width>
+    <height>602</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -211,7 +211,6 @@ color: rgb(0, 0, 0);</string>
     </layout>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
   <tabstop>pushButton_1</tabstop>

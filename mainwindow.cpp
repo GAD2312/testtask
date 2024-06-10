@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-double termFirst;
+double termFirst, hiddenAnswer;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton_minus->setCheckable(true);
     ui->pushButton_multiply->setCheckable(true);
     ui->pushButton_divide->setCheckable(true);
+
 }
 
 MainWindow::~MainWindow()
@@ -109,10 +110,12 @@ void MainWindow::mathOperations()
 
 void MainWindow::clickOnPushButton_CE()
 {
+
     ui->pushButton_plus->setChecked(false);
     ui->pushButton_minus->setChecked(false);
     ui->pushButton_multiply->setChecked(false);
     ui->pushButton_divide->setChecked(false);
+
 
     ui->label->setText("0");
 
@@ -123,26 +126,26 @@ void MainWindow::clickOnPushButton_CE()
 
 void MainWindow::clickOnPushButton_isEqualTo()
 {
-    double isEqual, termSecond;
+    double answer, termSecond;
     QString labelTerm;
 
     termSecond = ui->label->text().toDouble();
 
    if(ui->pushButton_plus->isChecked()){
-        isEqual = termFirst + termSecond;
-        labelTerm = QString::number(isEqual);
+        answer = termFirst + termSecond;
+        labelTerm = QString::number(answer);
 
         ui->label->setText(labelTerm);
         ui->pushButton_plus->setChecked(false);
    } else if(ui->pushButton_minus->isChecked()){
-       isEqual = termFirst - termSecond;
-       labelTerm = QString::number(isEqual);
+       answer = termFirst - termSecond;
+       labelTerm = QString::number(answer);
 
        ui->label->setText(labelTerm);
        ui->pushButton_minus->setChecked(false);
    } else if(ui->pushButton_multiply->isChecked()){
-       isEqual = termFirst * termSecond;
-       labelTerm = QString::number(isEqual);
+       answer = termFirst * termSecond;
+       labelTerm = QString::number(answer);
 
        ui->label->setText(labelTerm);
        ui->pushButton_multiply->setChecked(false);
@@ -150,8 +153,8 @@ void MainWindow::clickOnPushButton_isEqualTo()
        if (termSecond == 0){
             ui->label->setText("Error");
        } else {
-       isEqual = termFirst / termSecond;
-       labelTerm = QString::number(isEqual);
+       answer = termFirst / termSecond;
+       labelTerm = QString::number(answer);
 
        ui->label->setText(labelTerm);
        ui->pushButton_divide->setChecked(false);
