@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-double termFirst, hiddenAnswer , termSecond, answer;
+double termFirst;
 
-QString labelTerm;
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -48,8 +48,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::calculation(){
+void MainWindow::calculation(QString labelTerm = ""){
 
+    double termSecond, answer;
+    termSecond = ui->label->text().toDouble();
     if(ui->pushButton_plus->isChecked()){
          answer = termFirst + termSecond;
          labelTerm = QString::number(answer);
@@ -86,15 +88,24 @@ void MainWindow::clickOnPushButton_number()
     QPushButton  *button = (QPushButton *)sender();
 
     double term;
+    QString labelTerm;
 
 
     if (ui->label->text().contains(".") && button->text() == "0"){
        labelTerm = ui->label->text() + button->text();
     }
 
+    else if (ui->pushButton_isEqualTo->isChecked()){
+
+        ui->label_3->setText("");
+        term = (button->text()).toDouble();
+        labelTerm = QString::number(term);
+        ui->pushButton_isEqualTo->setChecked(false);
+    }
+
     else{
-    term = (ui->label->text() + button->text()).toDouble();
-    labelTerm = QString::number(term);
+        term = (ui->label->text() + button->text()).toDouble();
+        labelTerm = QString::number(term);
     }
     ui->label->setText(labelTerm);
 
@@ -158,7 +169,7 @@ void MainWindow::clickOnPushButton_CE()
 
 
     ui->label->setText("0");
-
+    ui->label_2->setText("");
 }
 
 
@@ -166,11 +177,11 @@ void MainWindow::clickOnPushButton_CE()
 void MainWindow::clickOnPushButton_isEqualTo()
 {
     QPushButton  *button = (QPushButton *)sender();
+    QString labelTerm;
 
-    termSecond = ui->label->text().toDouble();
     ui->label_3->setText("=");
-    calculation();
-
+    calculation(labelTerm);
+    ui->label_2->setText(labelTerm);
     button->setChecked(true);
 }
 

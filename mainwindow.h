@@ -25,7 +25,7 @@ private slots:
    void clickOnPushButton_CE();
    void mathOperations();
    void clickOnPushButton_isEqualTo();
-   void calculation();
+   void calculation(QString labelTerm);
 
 
 
