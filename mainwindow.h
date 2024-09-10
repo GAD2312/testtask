@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <iostream>
+#include <stdlib.h>
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -25,7 +27,7 @@ private slots:
    void clickOnPushButton_CE();
    void mathOperations();
    void clickOnPushButton_isEqualTo();
-   void calculation(QString labelTerm);
+   void calculation(int key);
 
 
 
